@@ -8,7 +8,7 @@ setup(
   author = 'Ken Hu',                   # Type in your name
   author_email = 'ken.hu@hwacom.com',      # Type in your E-Mail
   url = 'https://github.com/user/reponame',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',    # I explain this later on
+  download_url = 'https://github.com/kenhutaiwan/MyLlmUtils/archive/refs/tags/0.1.tar.gz',    # I explain this later on
   keywords = ['LLM', 'OpenAI', 'Azure'],   # Keywords that define your package best
   install_requires=[            # I get to this in a second
         'langchain',
