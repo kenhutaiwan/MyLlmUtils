@@ -116,16 +116,36 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
     pytest 
     ```
 
+* Github Release
+
+建立並發布git tag
+
+```
+git tag -a 0.1.1 -m "adjust config file content layout"
+git push origin 0.1.1
+```
+
+然後到Github倉庫頁面建立一個新的release
+
+複製Assets中Source code(.tar.gz)的URL, 把它貼到setup.py裡的download_url中
+
 * Build
 
-    ```
-    python3 setup.py sdist
-    python3 setup.py clean --all
-    ```
+  ```
+  python3 setup.py sdist
+  python3 setup.py clean --all
+  ```
+
+* Upload
+
+  PyPi不再允許在上傳過程中用個人帳號密碼做為身份驗證方式, 參考Hackmd上2023-09-21的記錄, 我把recovery code和api token放在google drive上一個名為PyPI-Recovery-Codes-kenhu.taiwan-2023-09-21T13_34_19.055159.txt的檔案中.
+  在上傳過程中要求認證的時候, 以"__token__"做為username, 以該檔案中的token值做為密碼 
+
+  ```
+  twine upload dist/*
+  ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- USAGE EXAMPLES -->
 ## Usage
