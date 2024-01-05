@@ -87,41 +87,41 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* [![Python][Python.org]][Python-url]
+* [![OpenAI][OpenAI.com]][OpenAI-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+本節說明如何建置本專案, 以及如何將建置成果供用戶使用.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+開發環境需要先安裝好Python和pip
+* pip
   ```sh
-  npm install npm@latest -g
+  pip install -r requirements.txt
   ```
 
-### Build
+### Development
 
 see [How to upload your python package to PyPi](https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56)
 
-```
-python3 setup.py sdist
-python3 setup.py clean --all
-```
+* Test
+
+    ```
+    pytest 
+    ```
+
+* Build
+
+    ```
+    python3 setup.py sdist
+    python3 setup.py clean --all
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,9 +130,45 @@ python3 setup.py clean --all
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+完成建置並推送到PyPi server後, 就可以在其它專案中將它設為相依套件, 並在程式碼中使用.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+* 相依套件
+
+```
+# pyproject.toml
+
+myllmutils = "^0.1"
+```
+
+* 匯入套件
+
+```
+from MyLlmUtils import LlmDefinition
+from MyLlmUtils.commons import ProviderType
+
+config_file_path = os.path.join(os.getcwd(), f"instance/{model_type.value}")
+llm_def = LlmDefinition(ProviderType.AZURE, config_file_path)
+llm = llm_def.get_llm(temperature=temperature)
+embeddings = llm_def.get_llm()
+```
+
+* 設定檔範例
+
+```
+[DEFAULT]
+
+[openai]
+API_KEY = OPENAI_API_KEY
+COMPLETIONS_MODEL = gpt-4-0613
+EMBEDDING_MODEL = text-embedding-ada-002
+
+[azure]
+API_KEY = AZURE_OPENAI_API_KEY
+API_BASE = https://openai4azurecsd.openai.azure.com/
+API_VERSION = 2023-05-15
+COMPLETIONS_MODEL = gpt-35-turbo
+EMBEDDING_MODEL = text-embedding-ada-002
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -182,7 +218,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Ken Hu - kenhu@duck.com
 
 Project Link: [https://github.com/kenhutaiwan/MyLlmUtils](https://github.com/kenhutaiwan/MyLlmUtils)
 
@@ -232,3 +268,7 @@ Project Link: [https://github.com/kenhutaiwan/MyLlmUtils](https://github.com/ken
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+[Python.org]: https://img.shields.io/badge/Python-00FFEE?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+[OpenAI.com]: https://img.shields.io/badge/OpenAI-666666?style=for-the-badge&logo=openai&logoColor=white
+[OpenAI-url]: https://openai.com/

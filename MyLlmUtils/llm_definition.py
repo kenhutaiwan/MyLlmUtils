@@ -35,20 +35,20 @@ class LlmDefinition(object):
     def __azure_llm(self, **kwargs):
         self.__reset_env()
 
-        os.environ["OPENAI_API_KEY"] = self.cf[self.provider.value]["OPENAI_API_KEY"]
+        os.environ["OPENAI_API_KEY"] = self.cf[self.provider.value]["API_KEY"]
         os.environ["OPENAI_API_TYPE"] = "azure"
-        os.environ["OPENAI_API_VERSION"] = self.cf[self.provider.value]["OPENAI_API_VERSION"]
-        os.environ["OPENAI_API_BASE"] = self.cf[self.provider.value]["OPENAI_API_BASE"]
-        os.environ["COMPLETIONS_MODEL_NAME"] = self.cf[self.provider.value]["COMPLETIONS_MODEL_NAME"]
+        os.environ["OPENAI_API_VERSION"] = self.cf[self.provider.value]["API_VERSION"]
+        os.environ["OPENAI_API_BASE"] = self.cf[self.provider.value]["API_BASE"]
+        os.environ["COMPLETIONS_MODEL"] = self.cf[self.provider.value]["COMPLETIONS_MODEL"]
 
-        kwargs['deployment_name'] = os.environ["COMPLETIONS_MODEL_NAME"]
+        kwargs['deployment_name'] = os.environ["COMPLETIONS_MODEL"]
         return AzureChatOpenAI(**kwargs)
 
     def __openai_llm(self, **kwargs):
         self.__reset_env()
 
-        os.environ["OPENAI_API_KEY"] = self.cf[self.provider.value]["OPENAI_API_KEY"]
-        kwargs['model_name'] = self.cf[self.provider.value]["COMPLETIONS_MODEL_NAME"]
+        os.environ["OPENAI_API_KEY"] = self.cf[self.provider.value]["API_KEY"]
+        kwargs['model_name'] = self.cf[self.provider.value]["COMPLETIONS_MODEL"]
         return ChatOpenAI(**kwargs)
 
     @staticmethod

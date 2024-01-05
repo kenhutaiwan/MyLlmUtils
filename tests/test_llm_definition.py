@@ -14,7 +14,7 @@ def test_azure():
     assert os.environ['OPENAI_API_TYPE'] == 'azure'
     assert os.environ['OPENAI_API_VERSION'] == '2023-05-15'
     assert os.environ['OPENAI_API_BASE'] == 'https://openai4azurecsd.openai.azure.com/'
-    assert os.environ['COMPLETIONS_MODEL_NAME'] == 'gpt-35-turbo'
+    assert os.environ['COMPLETIONS_MODEL'] == 'gpt-35-turbo'
 
 
 def test_openai():
