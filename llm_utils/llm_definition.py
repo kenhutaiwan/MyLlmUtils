@@ -1,9 +1,7 @@
-import os, sys
+import os
 import configparser
-from langchain.chat_models import AzureChatOpenAI, ChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings
-
-from MyLlmUtils.commons import ProviderType
+from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings, ChatOpenAI, OpenAIEmbeddings
+from llm_utils.commons import ProviderType
 
 
 class LlmDefinition(object):
@@ -26,11 +24,14 @@ class LlmDefinition(object):
     def get_llm(self, **kwargs):
         if self.provider == ProviderType.AZURE:
             return self.__azure_llm(**kwargs)
-        elif self.provider == ProviderType.OPENAI:
+        if self.provider == ProviderType.OPENAI:
             return self.__openai_llm(**kwargs)
 
     def get_embeddings(self):
-        return OpenAIEmbeddings(deployment=self.cf[self.provider.value]["EMBEDDINGS_MODEL_NAME"])
+        if self.provider == ProviderType.AZURE:
+            return AzureOpenAIEmbeddings(deployment=self.cf[self.provider.value]["EMBEDDINGS_MODEL"])
+        if self.provider == ProviderType.OPENAI:
+            return OpenAIEmbeddings()
 
     def __azure_llm(self, **kwargs):
         self.__reset_env()
@@ -38,7 +39,7 @@ class LlmDefinition(object):
         os.environ["OPENAI_API_KEY"] = self.cf[self.provider.value]["API_KEY"]
         os.environ["OPENAI_API_TYPE"] = "azure"
         os.environ["OPENAI_API_VERSION"] = self.cf[self.provider.value]["API_VERSION"]
-        os.environ["OPENAI_API_BASE"] = self.cf[self.provider.value]["API_BASE"]
+        os.environ["AZURE_OPENAI_ENDPOINT"] = self.cf[self.provider.value]["API_BASE"]
         os.environ["COMPLETIONS_MODEL"] = self.cf[self.provider.value]["COMPLETIONS_MODEL"]
 
         kwargs['deployment_name'] = os.environ["COMPLETIONS_MODEL"]
@@ -56,3 +57,13 @@ class LlmDefinition(object):
         key_list = [k for k in dict(os.environ).keys() if 'OPENAI' in k]
         for key in key_list:
             os.environ.pop(key)
+
+
+if __name__ == '__main__':
+    from llm_utils.commons import ProviderType
+    llm_def = LlmDefinition(provider=ProviderType.OPENAI, config_file_path="llm-config-gpt4.ini")
+    llm = llm_def.get_llm()
+    embeddings = llm_def.get_embeddings()
+    text = "This is a test query."
+    query_result = embeddings.embed_query(text)
+    print(query_result)
