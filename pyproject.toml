@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "LlmUtils"
+name = "MyLlmUtils"
 version = "0.1.4"
 description = ""
 authors = ["Ken Hu <ken.hu@hwacom.com>"]

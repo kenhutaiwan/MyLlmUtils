@@ -1,7 +1,7 @@
 import os
 import configparser
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings, ChatOpenAI, OpenAIEmbeddings
-from llm_utils.commons import ProviderType
+from MyLlmUtils.commons import ProviderType
 
 
 class LlmDefinition(object):
