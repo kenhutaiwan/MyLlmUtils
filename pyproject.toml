@@ -1,5 +1,8 @@
 [tool.poetry]
 name = "MyLlmUtils"
+packages = [
+    { include = "MyLlmUtils" }
+]
 version = "0.1.4"
 description = ""
 authors = ["Ken Hu <ken.hu@hwacom.com>"]

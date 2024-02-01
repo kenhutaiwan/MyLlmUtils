@@ -26,71 +26,20 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-<h3 align="center">My LLM Utitities</h3>
-
-<p align="center">
-一開始是因為練習LLM application開發時, 常常會在OpenAI與Azure OpenAI service之間頻繁切換. 雖然它倆系出同門, 但在設定上還是有一些不太一樣的地方.
-
-希望用一致的設定方式, 目前是使用.ini檔來提供設定值.
-
-<br />
-<a href="https://github.com/kenhutaiwan/MyLlmUtils"><strong>Explore the docs »</strong></a>
-<br />
-<br />
-<a href="https://github.com/kenhutaiwan/MyLlmUtils">View Demo</a>
-·
-<a href="https://github.com/kenhutaiwan/MyLlmUtils/issues">Report Bug</a>
-·
-<a href="https://github.com/kenhutaiwan/MyLlmUtils/issues">Request Feature</a>
-</p>
-</div>
-
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
-
+<h3 align="center">My LLM Utilities</h3>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `kenhutaiwan`, `MyLlmUtils`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
+<p>
+一開始是因為練習LLM application開發時, 常常會在OpenAI與Azure OpenAI service之間頻繁切換. 雖然它倆系出同門, 但在設定上還是有一些不太一樣的地方.
+希望用一致的設定方式, 目前是使用.ini檔來提供設定值.
+</p>
 
 ### Built With
 
 * [![Python][Python.org]][Python-url]
 * [![OpenAI][OpenAI.com]][OpenAI-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
@@ -100,10 +49,23 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Prerequisites
 
-開發環境需要先安裝好Python和pip
-* pip
+開發環境需要先安裝好Python和poetry
+
+* pyenv
+  
+  ```shell
+  curl https://pyenv.run | bash
+  ```
+* Python
+
   ```sh
-  pip install -r requirements.txt
+  pyenv install 3.11
+  ```
+  
+* poetry
+  
+  ```shell
+  curl -sSL https://install.python-poetry.org | python3 -
   ```
 
 ### Development

@@ -60,10 +60,18 @@ class LlmDefinition(object):
 
 
 if __name__ == '__main__':
-    from llm_utils.commons import ProviderType
-    llm_def = LlmDefinition(provider=ProviderType.OPENAI, config_file_path="llm-config-gpt4.ini")
+    from MyLlmUtils.commons import ProviderType
+    from langchain.schema import HumanMessage
+    from langchain_core.messages.base import BaseMessage
+    llm_def = LlmDefinition(provider=ProviderType.AZURE, config_file_path="llm-config-gpt4.ini")
     llm = llm_def.get_llm()
     embeddings = llm_def.get_embeddings()
+    message = HumanMessage(
+        content="Translate this sentence from English to French. I love programming."
+    )
+    answer:BaseMessage = llm.invoke([message])
+    print(answer)
+
     text = "This is a test query."
     query_result = embeddings.embed_query(text)
     print(query_result)
