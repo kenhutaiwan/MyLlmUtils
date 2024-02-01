@@ -68,9 +68,32 @@
   curl -sSL https://install.python-poetry.org | python3 -
   ```
 
+* Virtual environment
+
+  ```
+  python3 -m venv .venv
+  source .venv/bin/activate
+  pip install -r requirements.txt
+  ```  
+
+  或 使用 poetry:
+
+  ```
+  poetry install
+  poetry shell
+  ```
+
 ### Development
 
 see [How to upload your python package to PyPi](https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56)
+
+#### Without Poetry
+
+* Virtual environment
+
+  ```
+  source .venv/bin/activate
+  ```
 
 * Test
 
@@ -80,16 +103,16 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
 
 * Github Release
 
-建立並發布git tag
+  建立並發布git tag
 
-```
-git tag -a 0.1.1 -m "adjust config file content layout"
-git push origin 0.1.1
-```
+  ```
+  git tag -a 0.1.1 -m "adjust config file content layout"
+  git push origin 0.1.1
+  ```
 
-然後到Github倉庫頁面建立一個新的release
+  然後到Github倉庫頁面建立一個新的release
 
-複製Assets中Source code(.tar.gz)的URL, 把它貼到setup.py裡的download_url中
+  複製Assets中Source code(.tar.gz)的URL, 把它貼到setup.py裡的download_url中
 
 * Build
 
@@ -107,7 +130,31 @@ git push origin 0.1.1
   twine upload dist/*
   ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+#### With Poetry
+
+* Virtual environment
+
+  ```
+  poetry shell
+  ```
+
+* Test
+
+    ```
+    pytest 
+    ```
+
+* Build
+
+  ```
+  poetry build
+  ```
+
+* Upload
+
+  ```
+  poetry publish --username=__token__ --password=上述檔案中的token值
+  ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -159,34 +206,9 @@ EMBEDDING_MODEL = text-embedding-ada-002
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] 支援 Gemini
 
 See the [open issues](https://github.com/kenhutaiwan/MyLlmUtils/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- LICENSE -->
 ## License
@@ -203,19 +225,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Ken Hu - kenhu@duck.com
 
 Project Link: [https://github.com/kenhutaiwan/MyLlmUtils](https://github.com/kenhutaiwan/MyLlmUtils)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
