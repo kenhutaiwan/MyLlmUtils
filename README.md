@@ -163,10 +163,16 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
 
 * 相依套件
 
-```
-# pyproject.toml
+Poetry: 在 pyproject.toml 填入  
 
-myllmutils = "^0.1"
+```
+myllmutils = "^0.1.5"
+```
+
+Pip: 在 requirements.txt 填入  
+
+```
+myllmutils >= 0.1.5
 ```
 
 * 匯入套件
@@ -175,10 +181,9 @@ myllmutils = "^0.1"
 from MyLlmUtils import LlmDefinition
 from MyLlmUtils.commons import ProviderType
 
-config_file_path = os.path.join(os.getcwd(), f"instance/{model_type.value}")
+config_file_path = os.path.join(os.getcwd(), f"instance/llm_definition.ini")
 llm_def = LlmDefinition(ProviderType.AZURE, config_file_path)
-llm = llm_def.get_llm(temperature=temperature)
-embeddings = llm_def.get_llm()
+llm, embeddings = llm_def.get_models(temperature=temperature)
 ```
 
 * 設定檔範例
@@ -187,21 +192,19 @@ embeddings = llm_def.get_llm()
 [DEFAULT]
 
 [openai]
+USE_AZURE = False
 API_KEY = OPENAI_API_KEY
-COMPLETIONS_MODEL = gpt-4-0613
-EMBEDDING_MODEL = text-embedding-ada-002
+CHAT_COMPLETIONS_MODEL = gpt-4-0613
+EMBEDDINGS_MODEL = text-embedding-ada-002
 
 [azure]
+USE_AZURE = True
 API_KEY = AZURE_OPENAI_API_KEY
-API_BASE = https://openai4azurecsd.openai.azure.com/
+API_BASE = https://XXX.openai.azure.com/
 API_VERSION = 2023-05-15
 COMPLETIONS_MODEL = gpt-35-turbo
-EMBEDDING_MODEL = text-embedding-ada-002
+EMBEDDINGS_MODEL = text-embedding-ada-002
 ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- ROADMAP -->
 ## Roadmap

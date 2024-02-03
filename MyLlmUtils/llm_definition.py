@@ -13,6 +13,8 @@ class LlmDefinition(object):
     """
 
     def __init__(self, provider: ProviderType, config_file_path: str):
+        if not os.path.exists(config_file_path):
+            raise FileNotFoundError(f"config file '{config_file_path}' does not exist.")
         self.provider = provider
         self.config_file_path = config_file_path
         self.cf = configparser.ConfigParser()
@@ -21,13 +23,16 @@ class LlmDefinition(object):
     def __repr__(self):
         return "LmDefinition(provider={})".format(self.provider)
 
-    def get_llm(self, **kwargs):
+    def get_models(self, **kwargs) -> tuple:
+        return (self.__get_llm(**kwargs)), (self.__get_embeddings())
+
+    def __get_llm(self, **kwargs):
         if self.provider == ProviderType.AZURE:
             return self.__azure_llm(**kwargs)
         if self.provider == ProviderType.OPENAI:
             return self.__openai_llm(**kwargs)
 
-    def get_embeddings(self):
+    def __get_embeddings(self):
         if self.provider == ProviderType.AZURE:
             return AzureOpenAIEmbeddings(deployment=self.cf[self.provider.value]["EMBEDDINGS_MODEL"])
         if self.provider == ProviderType.OPENAI:
@@ -63,13 +68,13 @@ if __name__ == '__main__':
     from MyLlmUtils.commons import ProviderType
     from langchain.schema import HumanMessage
     from langchain_core.messages.base import BaseMessage
-    llm_def = LlmDefinition(provider=ProviderType.AZURE, config_file_path="llm-config-gpt4.ini")
-    llm = llm_def.get_llm()
-    embeddings = llm_def.get_embeddings()
+    llm_def = LlmDefinition(provider=ProviderType.AZURE, config_file_path="llm-config.ini")
+    llm, embeddings = llm_def.get_models()
+
     message = HumanMessage(
         content="Translate this sentence from English to French. I love programming."
     )
-    answer:BaseMessage = llm.invoke([message])
+    answer: BaseMessage = llm.invoke([message])
     print(answer)
 
     text = "This is a test query."
