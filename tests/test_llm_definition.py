@@ -1,5 +1,5 @@
-from MyLlmUtils.llm_definition import LlmDefinition
-from MyLlmUtils.commons import ProviderType
+from khu_llm_toolkit.model_definition import ModelDefinition
+from khu_llm_toolkit.commons import ProviderType
 import os
 import pathlib
 
@@ -7,7 +7,7 @@ config_file_path = os.path.join(pathlib.Path(__file__).parent.resolve(), 'config
 
 
 def test_azure():
-    llm_def = LlmDefinition(ProviderType.AZURE, config_file_path)
+    llm_def = ModelDefinition(ProviderType.AZURE, config_file_path)
     assert llm_def is not None
     llm, embeddings = llm_def.get_models()
     assert llm is not None
@@ -20,7 +20,7 @@ def test_azure():
 
 
 def test_openai():
-    llm_def = LlmDefinition(ProviderType.OPENAI, config_file_path)
+    llm_def = ModelDefinition(ProviderType.OPENAI, config_file_path)
     assert llm_def is not None
     llm, embeddings = llm_def.get_models()
     assert llm is not None

@@ -1,10 +1,10 @@
 import os
 import configparser
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings, ChatOpenAI, OpenAIEmbeddings
-from MyLlmUtils.commons import ProviderType
+from khu_llm_toolkit.commons import ProviderType
 
 
-class LlmDefinition(object):
+class ModelDefinition(object):
     """
     A class that represents an LLM definition.
 
@@ -65,10 +65,10 @@ class LlmDefinition(object):
 
 
 if __name__ == '__main__':
-    from MyLlmUtils.commons import ProviderType
+    from khu_llm_toolkit.commons import ProviderType
     from langchain.schema import HumanMessage
     from langchain_core.messages.base import BaseMessage
-    llm_def = LlmDefinition(provider=ProviderType.AZURE, config_file_path="llm-config.ini")
+    llm_def = ModelDefinition(provider=ProviderType.AZURE, config_file_path="llm-config.ini")
     llm, embeddings = llm_def.get_models()
 
     message = HumanMessage(

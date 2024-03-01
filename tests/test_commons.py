@@ -1,4 +1,4 @@
-from MyLlmUtils.commons import ProviderType
+from khu_llm_toolkit.commons import ProviderType
 
 
 def test_provider_type():

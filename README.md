@@ -32,9 +32,12 @@
 ## About The Project
 
 <p>
-一開始是因為練習LLM application開發時, 常常會在OpenAI與Azure OpenAI service之間頻繁切換. 雖然它倆系出同門, 但在設定上還是有一些不太一樣的地方.
-希望用一致的設定方式, 目前是使用.ini檔來提供設定值.
+個人工具箱，便於生成式AI的開發探索。私人研究，與工作無關，來窺伺動靜的人請自行退去。
 </p>
+
+### 2024-02-19
+
+修改專案及套件名稱
 
 ### Built With
 
@@ -123,7 +126,7 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
 
 * Upload
 
-  PyPi不再允許在上傳過程中用個人帳號密碼做為身份驗證方式, 參考Hackmd上2023-09-21的記錄, 我把recovery code和api token放在google drive上一個名為PyPI-Recovery-Codes-kenhu.taiwan-2023-09-21T13_34_19.055159.txt的檔案中.
+  PyPi不再允許在上傳過程中用個人帳號密碼做為身份驗證方式, 參考[Hackmd記錄](https://hackmd.io/4zug-RFaS362quf2Qfj2CA#2023-09-21)。
   在上傳過程中要求認證的時候, 以"__token__"做為username, 以該檔案中的token值做為密碼 
 
   ```
@@ -166,24 +169,24 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
 Poetry: 在 pyproject.toml 填入  
 
 ```
-myllmutils = "^0.1.5"
+khu_llm_toolkit = "^0.1.6"
 ```
 
 Pip: 在 requirements.txt 填入  
 
 ```
-myllmutils >= 0.1.5
+khu_llm_toolkit >= 0.1.6
 ```
 
 * 匯入套件
 
 ```
-from MyLlmUtils import LlmDefinition
-from MyLlmUtils.commons import ProviderType
+from khu_llm_toolkit import ModelDefinition
+from khu_llm_toolkit.commons import ProviderType
 
-config_file_path = os.path.join(os.getcwd(), f"instance/llm_definition.ini")
-llm_def = LlmDefinition(ProviderType.AZURE, config_file_path)
-llm, embeddings = llm_def.get_models(temperature=temperature)
+config_file_path = os.path.join(os.getcwd(), f"instance/model_definition.ini")
+model_def = ModelDefinition(ProviderType.AZURE, config_file_path)
+llm, embeddings = model_def.get_models(temperature=temperature)
 ```
 
 * 設定檔範例
@@ -200,7 +203,7 @@ EMBEDDINGS_MODEL = text-embedding-ada-002
 [azure]
 USE_AZURE = True
 API_KEY = AZURE_OPENAI_API_KEY
-API_BASE = https://XXX.openai.azure.com/
+API_BASE = AZURE_OPENAI_API_ENDPOINT_URL
 API_VERSION = 2023-05-15
 COMPLETIONS_MODEL = gpt-35-turbo
 EMBEDDINGS_MODEL = text-embedding-ada-002
@@ -210,6 +213,7 @@ EMBEDDINGS_MODEL = text-embedding-ada-002
 ## Roadmap
 
 - [ ] 支援 Gemini
+- [ ] 支援 Huggingface上的開源模型
 
 See the [open issues](https://github.com/kenhutaiwan/MyLlmUtils/issues) for a full list of proposed features (and known issues).
 
