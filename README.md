@@ -74,14 +74,6 @@
 * Virtual environment
 
   ```
-  python3 -m venv .venv
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```  
-
-  或 使用 poetry:
-
-  ```
   poetry install
   poetry shell
   ```
@@ -90,7 +82,33 @@
 
 see [How to upload your python package to PyPi](https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56)
 
-#### Without Poetry
+#### 使用 Poetry
+
+* Virtual environment
+
+  ```
+  poetry shell
+  ```
+
+* Test
+
+    ```
+    pytest 
+    ```
+
+* Build
+
+  ```
+  poetry build
+  ```
+
+* Upload
+
+  ```
+  poetry publish --username=__token__ --password=上述檔案中的token值
+  ```
+
+#### 手動執行 setuptools
 
 * Virtual environment
 
@@ -131,32 +149,6 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
 
   ```
   twine upload dist/*
-  ```
-
-#### With Poetry
-
-* Virtual environment
-
-  ```
-  poetry shell
-  ```
-
-* Test
-
-    ```
-    pytest 
-    ```
-
-* Build
-
-  ```
-  poetry build
-  ```
-
-* Upload
-
-  ```
-  poetry publish --username=__token__ --password=上述檔案中的token值
   ```
 
 <!-- USAGE EXAMPLES -->
