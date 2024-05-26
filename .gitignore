@@ -160,4 +160,4 @@ cython_debug/
 .idea/
 
 # ini file containing real api key
-config*.ini
+*.ini

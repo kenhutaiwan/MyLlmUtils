@@ -105,7 +105,7 @@ see [How to upload your python package to PyPi](https://medium.com/@joel.barmett
 * Upload
 
   ```
-  poetry publish --username=__token__ --password=上述檔案中的token值
+  poetry publish --username=__token__ --password=pypi token值
   ```
 
 #### 手動執行 setuptools
@@ -204,7 +204,8 @@ EMBEDDINGS_MODEL = text-embedding-ada-002
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] 支援 Gemini
+- [x] 支援 Gemini (0.1.7 2024-04-25)
+- [x] 一設定檔,多模型 (0.1.7 2024-04-25)
 - [ ] 支援 Huggingface上的開源模型
 
 See the [open issues](https://github.com/kenhutaiwan/MyLlmUtils/issues) for a full list of proposed features (and known issues).
