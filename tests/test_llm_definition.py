@@ -4,7 +4,7 @@ import os
 import pathlib
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings, ChatOpenAI, OpenAIEmbeddings
 
-config_file_path = os.path.join(pathlib.Path(__file__).parent.resolve(), 'config.ini')
+config_file_path = os.path.join(pathlib.Path(__file__).parent.resolve(), 'test-config.ini')
 
 
 def test_azure():
