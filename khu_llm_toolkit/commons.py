@@ -10,3 +10,8 @@ class ProviderType(Enum):
 class ModelType(Enum):
     LLM = 'llm'
     EMBEDDINGS = 'embeddings'
+
+
+class FrameworkType(Enum):
+    LANGCHAIN = 'langchain'
+    LLAMA_INDEX = 'llama_index'
