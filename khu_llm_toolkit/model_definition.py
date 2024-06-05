@@ -4,9 +4,9 @@ from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings, ChatOpenAI,
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from llama_index.llms.openai import OpenAI as LlamaIndexOpenAI
 from llama_index.llms.azure_openai import AzureOpenAI as LlamaIndexAzureOpenAI
+from llama_index.embeddings.openai import OpenAIEmbedding as LlamaIndexOpenAIEmbeddings
 from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding as LlamaIndexAzureOpenAIEmbeddings
-
-from khu_llm_toolkit.commons import FrameworkType, ModelType
+from khu_llm_toolkit.commons import FrameworkType, ModelType, ProviderType
 
 
 class ModelDefinition(object):
@@ -71,14 +71,19 @@ class ModelDefinition(object):
                                              deployment=model_dict["embeddings_model"])
             else:
                 return LlamaIndexAzureOpenAIEmbeddings(
-                    model="text-embedding-ada-002",
-                    deployment_name="my-custom-embedding",
+                    model=model_dict["embeddings_model"],
+                    deployment_name=model_dict["embeddings_model"],
                     api_key=model_dict["api_key"],
                     azure_endpoint=model_dict["api_base"],
                     api_version=model_dict["api_version"],
                 )
         if provider_type == ProviderType.OPENAI:
-            return OpenAIEmbeddings(openai_api_key=model_dict["api_key"])
+            if framework == FrameworkType.LANGCHAIN:
+                return OpenAIEmbeddings(openai_api_key=model_dict["api_key"])
+            else:
+                return LlamaIndexOpenAIEmbeddings(
+                    model=model_dict["embeddings_model"],
+                    api_key=model_dict["api_key"])
         if provider_type == ProviderType.GOOGLE:
             return GoogleGenerativeAIEmbeddings(google_api_key=model_dict["api_key"],
                                                 model=model_dict["embeddings_model"])
@@ -93,8 +98,8 @@ class ModelDefinition(object):
                                    **kwargs)
         else:
             return LlamaIndexAzureOpenAI(
-                model="gpt-35-turbo-16k",
-                deployment_name="my-custom-llm",
+                model=model_dict["completions_model"],
+                deployment_name=model_dict["completions_model"],
                 api_key=model_dict["api_key"],
                 azure_endpoint=model_dict["api_base"],
                 api_version=model_dict["api_version"],

@@ -3,7 +3,7 @@ name = "khu-llm-toolkit"
 packages = [
     { include = "khu_llm_toolkit" }
 ]
-version = "0.1.7"
+version = "0.1.7a"
 description = ""
 authors = ["Ken Hu <ken.hu@hwacom.com>"]
 readme = "README.md"
