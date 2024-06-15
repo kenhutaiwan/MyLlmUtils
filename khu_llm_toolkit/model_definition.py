@@ -67,8 +67,8 @@ class ModelDefinition(object):
         if provider_type == ProviderType.OPENAI:
             return OpenAIEmbeddings(openai_api_key=model_dict["api_key"])
         if provider_type == ProviderType.GOOGLE:
-            return GoogleGenerativeAIEmbeddings(google_api_key=model_dict["api_key"],
-                                                model=model_dict["embeddings_model"])
+            os.environ["GOOGLE_API_KEY"] = model_dict["api_key"]
+            return GoogleGenerativeAIEmbeddings(model=model_dict["embeddings_model"])
 
     def __azure_llm(self, model_dict, **kwargs):
         kwargs['azure_deployment'] = model_dict["completions_model"]
@@ -95,26 +95,8 @@ class ModelDefinition(object):
 
 
 if __name__ == '__main__':
-    from khu_llm_toolkit.commons import ProviderType
-    from langchain.schema import HumanMessage
-    from langchain_core.messages.base import BaseMessage
     llm_def = ModelDefinition(config_file_path="config.ini")
-    # llm = llm_def.get_model('azurecsd-aoai-gpt-35')
-    llm = llm_def.get_model('kenhu-openai-gpt-4')
-    # llm = llm_def.get_model('google-gai-gemini')
-    print(llm)
-
-    message = HumanMessage(
-        content="Translate this sentence from English to French. I love programming."
-    )
-    # answer: BaseMessage = llm.invoke([message])
-    # print(answer)
-
-    # embeddings =  llm_def.get_model('azurecsd-aoai-embeddings')
-    embeddings =  llm_def.get_model('kenhu-openai-embeddings')
-    # 2024/5/25 不知道為什麼google embeddings一直報錯
-    # embeddings =  llm_def.get_model('google-gai-embeddings')
-    print(embeddings)
+    llm = llm_def.get_model('google-gai-gemini')
+    embeddings =  llm_def.get_model('google-gai-embeddings')
     text = "This is a test query."
-    # query_result = embeddings.embed_query(text)
-    # print(query_result)
+    print(embeddings.embed_query(text))

@@ -206,6 +206,7 @@ EMBEDDINGS_MODEL = text-embedding-ada-002
 
 - [x] 支援 Gemini (0.1.7 2024-04-25)
 - [x] 一設定檔,多模型 (0.1.7 2024-04-25)
+  - [x] 排除Gemini Embeddings模型使用錯誤問題 (0.1.8 2024-06-15)    
 - [ ] 支援 Huggingface上的開源模型
 
 See the [open issues](https://github.com/kenhutaiwan/MyLlmUtils/issues) for a full list of proposed features (and known issues).
