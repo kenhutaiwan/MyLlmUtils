@@ -113,10 +113,10 @@ class ModelDefinition(object):
             return LlamaIndexOpenAI(model=model_dict["completions_model"],
                                     api_key=model_dict["api_key"])
 
-    def __google_llm(self, model_dict, **kwargs):
+    def __google_llm(self, model_dict, framework: FrameworkType, **kwargs):
         return ChatGoogleGenerativeAI(google_api_key=model_dict["api_key"],
-                                      model=model_dict["completions_model"],
-                                      **kwargs)
+                                          model=model_dict["completions_model"],
+                                          **kwargs)
 
     @staticmethod
     def __reset_env():
@@ -129,23 +129,20 @@ if __name__ == '__main__':
     from khu_llm_toolkit.commons import ProviderType
     from langchain.schema import HumanMessage
     from langchain_core.messages.base import BaseMessage
-    llm_def = ModelDefinition(config_file_path="config.ini")
-    # llm = llm_def.get_model('azurecsd-aoai-gpt-35')
-    llm = llm_def.get_model('kenhu-openai-gpt-4')
-    # llm = llm_def.get_model('google-gai-gemini')
-    print(llm)
+    model_def = ModelDefinition(config_file_path="/home/ken/Develop/MyLlmUtils/llm-config.ini")
+    openai_model = model_def.get_model('kenhu-openai-gpt-4')
+    openai_embeddings = model_def.get_model('kenhu-openai-embeddings-ada-002')
+    gemini_model = model_def.get_model('gemini-1.5-flash')
+    gemini_embeddings = model_def.get_model('gemini-embeddings')
 
+    # test LLM
     message = HumanMessage(
         content="Translate this sentence from English to French. I love programming."
     )
-    # answer: BaseMessage = llm.invoke([message])
+    # answer: BaseMessage = gemini_model.invoke([message])
     # print(answer)
 
-    # embeddings =  llm_def.get_model('azurecsd-aoai-embeddings')
-    embeddings =  llm_def.get_model('kenhu-openai-embeddings')
-    # 2024/5/25 不知道為什麼google embeddings一直報錯
-    # embeddings =  llm_def.get_model('google-gai-embeddings')
-    print(embeddings)
+    # test EMmbedding
     text = "This is a test query."
-    # query_result = embeddings.embed_query(text)
-    # print(query_result)
+    query_result = gemini_embeddings.embed_query(text)
+    print(query_result)

@@ -32,7 +32,7 @@
 ## About The Project
 
 <p>
-個人工具箱，便於生成式AI的開發探索。私人研究，與工作無關，來窺伺動靜的人請自行退去。
+個人工具箱，在開發生成式AI應用時，用來簡化配置工作。私人研究，與工作無關。
 </p>
 
 ### 2024-02-19
@@ -186,19 +186,18 @@ llm, embeddings = model_def.get_models(temperature=temperature)
 ```
 [DEFAULT]
 
-[openai]
-USE_AZURE = False
-API_KEY = OPENAI_API_KEY
-CHAT_COMPLETIONS_MODEL = gpt-4-0613
-EMBEDDINGS_MODEL = text-embedding-ada-002
+[kenhu-openai-gpt-35-turbo]
+PROVIDER=openai
+TYPE=llm
+DISPLAY_NAME=個人OpenAI帳號GPT-4-turbo模型 with vision capabilities
+API_KEY=sk-c6
+COMPLETIONS_MODEL=gpt-3.5-turbo
 
-[azure]
-USE_AZURE = True
-API_KEY = AZURE_OPENAI_API_KEY
-API_BASE = AZURE_OPENAI_API_ENDPOINT_URL
-API_VERSION = 2023-05-15
-COMPLETIONS_MODEL = gpt-35-turbo
-EMBEDDINGS_MODEL = text-embedding-ada-002
+[kenhu-openai-embeddings-003-large]
+PROVIDER=openai
+TYPE=embeddings
+API_KEY=sk-c6
+EMBEDDINGS_MODEL=text-embedding-3-large
 ```
 
 <!-- ROADMAP -->
